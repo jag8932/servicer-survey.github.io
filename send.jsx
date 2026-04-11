@@ -1,0 +1,69 @@
+/**
+ * send.js
+ * Sends the FormInviteEmail via Resend.
+ *
+ * Setup:
+ *   npm install resend @react-email/render react react-dom
+ *
+ * Run:
+ *   RESEND_API_KEY=re_xxxx node send.js
+ *   — or add RESEND_API_KEY to a .env file and use dotenv
+ */
+
+import React from 'react';
+import { Resend } from 'resend';
+import { render } from '@react-email/render';
+import FormInviteEmail from './FormInviteEmail.jsx';
+
+// ─── CONFIG ───────────────────────────────────────────────────
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const SENDER   = 'Living Well Stores <servicenetwork@livingwellstores.com>';
+const FORM_URL = 'https://jag8932.github.io/servicer-survey.github.io/';           // your hosted form URL
+const DEADLINE = 'Friday, April 11th';             // set to null to hide
+// ──────────────────────────────────────────────────────────────
+
+// Single send — one recipient
+async function sendOne({ to, name }) {
+  const html = await render(
+    <FormInviteEmail
+      recipientName={name}
+      formUrl={FORM_URL}
+      senderName="The Team"
+      deadline={DEADLINE}
+    />
+  );
+
+  const { data, error } = await resend.emails.send({
+    from:    SENDER,
+    to,
+    subject: `${name}, we'd love your feedback — 2 min survey`,
+    html,
+  });
+
+  if (error) {
+    console.error(`✗ Failed to send to ${to}:`, error);
+  } else {
+    console.log(`✓ Sent to ${to} — ID: ${data.id}`);
+  }
+}
+
+// Bulk send — list of recipients
+async function sendBulk(recipients) {
+  for (const recipient of recipients) {
+    await sendOne(recipient);
+    // Small delay to stay within rate limits
+    await new Promise(r => setTimeout(r, 300));
+  }
+}
+
+// ─── RECIPIENTS ───────────────────────────────────────────────
+const recipients = [
+  { to: 'larry.berk@gmail.com',  name: 'Larry'  },
+  { to: '4amystone@gmail.com',  name: 'Amy'  },
+  { to: 'jw@dangerousmedia.com', name: 'Jeff' },
+  { to: 'jacobgoodwillie@gmail.com', name: 'Jacob' },
+];
+// ──────────────────────────────────────────────────────────────
+
+sendBulk(recipients);
