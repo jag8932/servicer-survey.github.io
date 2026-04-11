@@ -24,12 +24,13 @@ const DEADLINE = 'Friday, April 11th';             // set to null to hide
 // ──────────────────────────────────────────────────────────────
 
 // Single send — one recipient
-async function sendOne({ to, name }) {
+async function sendOne({ to, name, company }) {
   const html = await render(
     <FormInviteEmail
       recipientName={name}
+      companyName={company}
       formUrl={FORM_URL}
-      senderName="The Team"
+      senderName="Living Well Stores"
       deadline={DEADLINE}
     />
   );
@@ -37,7 +38,7 @@ async function sendOne({ to, name }) {
   const { data, error } = await resend.emails.send({
     from:    SENDER,
     to,
-    subject: `${name}, we'd love your feedback — 2 min survey`,
+    subject: `An important message from Living Well Stores to ${company}`,
     html,
   });
 
@@ -59,9 +60,9 @@ async function sendBulk(recipients) {
 
 // ─── RECIPIENTS ───────────────────────────────────────────────
 const recipients = [
-  { to: 'larry.berk@gmail.com',  name: 'Larry'  },
-  { to: '4amystone@gmail.com',  name: 'Amy'  },
-  { to: 'jw@dangerousmedia.com', name: 'Jeff' },
+  { to: 'larry.berk@gmail.com',  name: 'Larry', company: 'Berk Services'      },
+  { to: '4amystone@gmail.com',   name: 'Amy',   company: 'Stone Repair Co.'   },
+  { to: 'jw@dangerousmedia.com', name: 'Jeff',  company: 'Dangerous Media'    },
 ];
 // ──────────────────────────────────────────────────────────────
 

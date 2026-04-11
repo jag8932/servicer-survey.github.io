@@ -37,8 +37,9 @@ import {
 
 export default function FormInviteEmail({
   recipientName = 'there',
+  companyName = 'your company',
   formUrl = 'https://yourform.com',
-  senderName = 'The Team',
+  senderName = 'Living Well Stores',
   deadline = null,
 }) {
   return (
@@ -56,7 +57,7 @@ export default function FormInviteEmail({
         />
       </Head>
       <Preview>
-        {recipientName}, you're invited to share your feedback — takes 2 minutes.
+        An important message from Living Well Stores — please complete our servicer survey.
       </Preview>
 
       <Body style={styles.body}>
@@ -69,24 +70,25 @@ export default function FormInviteEmail({
           <Section style={styles.card}>
 
             {/* Eyebrow */}
-            <Text style={styles.eyebrow}>QUICK SURVEY</Text>
+            <Text style={styles.eyebrow}>SERVICER SURVEY</Text>
 
             {/* Heading */}
             <Heading style={styles.heading}>
-              We'd love your&nbsp;thoughts,&nbsp;{recipientName}.
+              Living Well Stores Servicer Survey
             </Heading>
 
             {/* Body copy */}
             <Text style={styles.body_text}>
-              We're always working to improve, and your perspective matters. We've put
-              together a short two-minute survey — no account needed, no fluff.
+              This email contains a link below to the Living Well Stores servicer survey.
+              We will use this information to help ensure that we can deliver service work
+              orders to you reliably, accurately and in a timely manner.
             </Text>
 
-            {deadline && (
-              <Text style={styles.deadline_text}>
-                ⏱ We'd appreciate responses by <strong>{deadline}</strong>.
-              </Text>
-            )}
+            <Text style={styles.body_text}>
+              We would be grateful if you'd take ten minutes to complete this survey.
+              If you are concerned with the authenticity of this message or the survey,
+              call us at <strong>800-704-8432 X101</strong>.
+            </Text>
 
             {/* CTA */}
             <Section style={styles.cta_section}>
@@ -94,18 +96,6 @@ export default function FormInviteEmail({
                 Open the survey →
               </Button>
             </Section>
-
-            <Hr style={styles.hr} />
-
-            {/* What to expect */}
-            <Text style={styles.small_heading}>What to expect</Text>
-            <Row>
-              <Column style={styles.bullet_col}>
-                <Text style={styles.bullet}>① Your overall satisfaction</Text>
-                <Text style={styles.bullet}>② Features you use most</Text>
-                <Text style={styles.bullet}>③ Any open feedback you'd like to share</Text>
-              </Column>
-            </Row>
 
             <Hr style={styles.hr} />
 
