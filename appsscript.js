@@ -25,7 +25,7 @@
 
 // ─── CONFIG ───────────────────────────────────────────────────
 const SHEET_NAME    = 'Responses';
-const SPREADSHEET_ID = '';  // Paste your Google Sheet ID here (the long string in the sheet's URL)
+const SPREADSHEET_ID = '16S1JxCzEakyuf8zsGSUSS8aPGGKsqLvq8eo8AFqevgw';  // Paste your Google Sheet ID here (the long string in the sheet's URL)
                             // e.g. '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms'
                             // Required if this is a standalone script (created at script.google.com)
 const NOTIFY_EMAIL  = '';   // Optional: your email address to get notified on each submission
