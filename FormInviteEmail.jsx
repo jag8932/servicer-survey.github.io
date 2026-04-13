@@ -127,7 +127,7 @@ export default function FormInviteEmail({
 
 const styles = {
   body: {
-    backgroundColor: '#f5f2ec',
+    backgroundColor: '#f0f0f0',
     fontFamily: "'DM Sans', Helvetica, Arial, sans-serif",
     margin: '0',
     padding: '40px 0',
@@ -142,8 +142,8 @@ const styles = {
     borderRadius: '2px 2px 0 0',
   },
   card: {
-    backgroundColor: '#faf8f4',
-    border: '1px solid #d8d0c4',
+    backgroundColor: '#ffffff',
+    border: '1px solid #e0e0e0',
     borderTop: 'none',
     borderRadius: '0 0 6px 6px',
     padding: '40px 44px',
@@ -174,7 +174,7 @@ const styles = {
     fontSize: '14px',
     lineHeight: '1.5',
     color: '#0f0e0d',
-    backgroundColor: '#fdf4ef',
+    backgroundColor: '#fff5f5',
     border: '1px solid #f0c4ae',
     borderRadius: '4px',
     padding: '10px 14px',
@@ -186,7 +186,7 @@ const styles = {
   },
   button: {
     backgroundColor: '#0f0e0d',
-    color: '#f5f2ec',
+    color: '#ffffff',
     fontSize: '14px',
     fontWeight: '500',
     letterSpacing: '0.03em',
@@ -196,7 +196,7 @@ const styles = {
     display: 'inline-block',
   },
   hr: {
-    borderColor: '#d8d0c4',
+    borderColor: '#e0e0e0',
     borderTopWidth: '1px',
     margin: '28px 0',
   },

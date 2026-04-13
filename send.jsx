@@ -18,7 +18,7 @@ import FormInviteEmail from './FormInviteEmail.jsx';
 // ─── CONFIG ───────────────────────────────────────────────────
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const SENDER   = 'Living Well Stores <servicenetwork@livingwellstores>'; // test sender — replace with verified domain for production
+const SENDER   = 'Living Well Stores <servicenetwork@livingwellstores.com>'; // test sender — replace with verified domain for production
 const FORM_URL = 'https://jag8932.github.io/servicer-survey.github.io/';           // your hosted form URL
 const DEADLINE = 'Friday, April 11th';             // set to null to hide
 // ──────────────────────────────────────────────────────────────
@@ -60,9 +60,10 @@ async function sendBulk(recipients) {
 
 // ─── RECIPIENTS ───────────────────────────────────────────────
 const recipients = [
-  { to: 'larry.berk@gmail.com',  name: 'Larry', company: 'Berk Services'      },
-  { to: '4amystone@gmail.com',   name: 'Amy',   company: 'Stone Repair Co.'   },
-  { to: 'jw@dangerousmedia.com', name: 'Jeff',  company: 'Dangerous Media'    },
+  // { to: 'larry.berk@gmail.com',  name: 'Larry', company: 'Berk Services'      },
+  // { to: '4amystone@gmail.com',   name: 'Amy',   company: 'Stone Repair Co.'   },
+  // { to: 'jw@dangerousmedia.com', name: 'Jeff',  company: 'Dangerous Media'    },
+  { to: 'jacobgoodwillie@gmail.com', name: 'Jacob', company: 'Jacob Goodwillie Developer'}
 ];
 // ──────────────────────────────────────────────────────────────
 
