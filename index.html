@@ -1123,20 +1123,22 @@
     if (sidField && urlParams.get('sid')) sidField.value = urlParams.get('sid');
 
     // Early exit when respondent selects No
+    let declineSubmitted = false;
     form.querySelectorAll('input[name="continueNetwork"]').forEach(radio => {
       radio.addEventListener('change', () => {
         const declined = radio.value === 'No' && radio.checked;
         surveyBody.style.display = declined ? 'none' : '';
         submitRow.style.display = declined ? 'none' : '';
         goodbyeMsg.style.display = declined ? 'block' : 'none';
-        if (declined) {
-          // Submit the "No" response so it's recorded in the sheet
+        if (declined && !declineSubmitted) {
+          declineSubmitted = true;
           fetch(APPS_SCRIPT_URL, {
             method: 'POST', mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ submittedAt: new Date().toISOString(), servicerID: sidField.value, continueNetwork: 'No' }),
           }).catch(() => {});
         }
+        if (!declined) declineSubmitted = false;
       });
     });
 
@@ -1154,6 +1156,14 @@
       e.preventDefault();
       successMsg.classList.remove('visible');
       errorMsg.classList.remove('visible');
+
+      // Reject empty/bot submissions — company name is the minimum required field
+      if (!val('companyName')) {
+        errorMsg.textContent = 'Please enter your company name before submitting.';
+        errorMsg.classList.add('visible');
+        return;
+      }
+
       submitBtn.classList.add('loading');
       submitBtn.textContent = 'Submitting…';
 
