@@ -60,9 +60,9 @@ async function sendBulk(recipients) {
 
 // ─── RECIPIENTS ───────────────────────────────────────────────
 const recipients = [
-  // { to: 'larry.berk@gmail.com',  name: 'Larry', company: 'Berk Services'      },
-  // { to: '4amystone@gmail.com',   name: 'Amy',   company: 'Stone Repair Co.'   },
-  // { to: 'jw@dangerousmedia.com', name: 'Jeff',  company: 'Dangerous Media'    },
+  { to: 'larry.berk@gmail.com',  name: 'Larry', company: 'Berk Services'      },
+  { to: '4amystone@gmail.com',   name: 'Amy',   company: 'Stone Repair Co.'   },
+  { to: 'jw@dangerousmedia.com', name: 'Jeff',  company: 'Dangerous Media'    },
   { to: 'jacobgoodwillie@gmail.com', name: 'Jacob', company: 'Jacob Goodwillie Developer'}
 ];
 // ──────────────────────────────────────────────────────────────
