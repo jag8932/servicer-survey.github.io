@@ -116,11 +116,12 @@
     }
 
     .header .eyebrow::after {
+      /*
       content: '';
       display: block;
       width: 28px;
       height: 1px;
-      background: var(--accent);
+      background: var(--accent); */
     }
 
     .header h1 {
@@ -315,6 +316,29 @@
     .matrix-wrap {
       overflow-x: auto;
       margin-top: 8px;
+      position: relative;
+    }
+
+    @media (max-width: 600px) {
+      .matrix-wrap.scroll-hint::after {
+        content: 'scroll \2192';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 72px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.95));
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 10px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #1a56a0;
+        pointer-events: none;
+        font-family: 'DM Sans', sans-serif;
+      }
     }
 
     table.matrix {
@@ -566,6 +590,15 @@
         <div id="goodbyeMsg" style="display:none; padding:32px 28px; background:#f0f7ff; border:1px solid #b3d4f5; border-radius:6px; margin-bottom:24px;">
           <p style="font-size:17px; font-weight:600; color:#1a56a0; margin-bottom:12px;">Thank you for letting us know.</p>
           <p style="font-size:15px; color:#1a1a1a; line-height:1.7;">We're sorry to hear you'd like to be removed from our servicer network. We'll update our records accordingly. If you change your mind in the future, please reach out to us at <strong>servicenetwork@livingwellstores.com</strong> or call <strong>800-704-8432</strong>.</p>
+
+          <div id="declineReasonSection" style="margin-top:24px; border-top:1px solid #b3d4f5; padding-top:20px;">
+            <label for="declineReason" style="display:block; font-size:14px; font-weight:500; color:#1a1a1a; margin-bottom:8px;">Would you mind sharing your reasons? <span style="font-weight:300;">(optional)</span></label>
+            <textarea id="declineReason" name="declineReason" rows="4" style="width:100%; border:1px solid #b3d4f5; border-radius:4px; padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:14px; color:#1a1a1a; resize:vertical; outline:none; background:#fff;" placeholder="Your feedback helps us improve our servicer program…"></textarea>
+            <div style="margin-top:12px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+              <button type="button" id="declineSubmitBtn" style="background:#1a56a0; color:#fff; border:none; border-radius:4px; padding:10px 24px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer;">Submit response</button>
+              <span id="declineConfirm" style="display:none; font-size:13px; color:#2d6a4f;">✓ Response recorded — thank you.</span>
+            </div>
+          </div>
         </div>
 
         <!-- All survey sections — hidden when respondent selects No -->
@@ -774,19 +807,7 @@
                   <td><input type="checkbox" name="prod_stairlift_deliver" value="1" /></td>
                 </tr>
                 <tr>
-                  <td>Receiving, unboxing, assembly &amp; delivery — power mobility products</td>
-                  <td><input type="checkbox" name="prod_rxpower_sell" value="1" /></td>
-                  <td><input type="checkbox" name="prod_rxpower_service" value="1" /></td>
-                  <td><input type="checkbox" name="prod_rxpower_deliver" value="1" /></td>
-                </tr>
-                <tr>
-                  <td>Receiving, unboxing, assembly &amp; delivery — lift recliners</td>
-                  <td><input type="checkbox" name="prod_rxlift_sell" value="1" /></td>
-                  <td><input type="checkbox" name="prod_rxlift_service" value="1" /></td>
-                  <td><input type="checkbox" name="prod_rxlift_deliver" value="1" /></td>
-                </tr>
-                <tr>
-                  <td>Installation of aging-in-place items (shower grab bars, etc.)</td>
+                  <td>Installation of shower grab bars and other items required to age-in-place</td>
                   <td><input type="checkbox" name="prod_aginplace_sell" value="1" /></td>
                   <td><input type="checkbox" name="prod_aginplace_service" value="1" /></td>
                   <td><input type="checkbox" name="prod_aginplace_deliver" value="1" /></td>
@@ -1026,11 +1047,9 @@
               placeholder="e.g. CRTS, ATP, CAPS, manufacturer-specific certifications…"></textarea>
           </div>
 
-          <div class="field-row col-2">
-            <div>
-              <label class="field-label" for="numTechnicians">How many technicians do you have?</label>
-              <input type="number" id="numTechnicians" name="numTechnicians" placeholder="e.g. 4" min="0" />
-            </div>
+          <div class="field-group">
+            <label class="field-label" for="numTechnicians">How many technicians do you have?</label>
+            <input type="text" id="numTechnicians" name="numTechnicians" placeholder="e.g. 4, or 2 Mon–Wed / 1 other days" />
           </div>
 
           <div class="field-group">
@@ -1054,19 +1073,20 @@
 
         <!-- ── REFERRAL / PARTNERSHIP ── -->
         <div class="section-block">
+          <h2 class="section-heading"><span class="num">8</span> Referral Opportunities</h2>
           <div class="field-group">
             <label class="field-label">Living Well Stores has access to best-in-class products. In addition to power
               mobility and lift recliners, we also offer consumer/professional bracing, wheelchairs and general DME and
               with top-tier pricing. If you would like to learn more about our programs where you could earn incentives
               in exchange for bringing a customer to us and/or getting access to product that you could sell and
-              deliver, who should we contact?</label>
+              deliver, would you like to participate?</label>
             <div class="options-inline" style="margin-bottom:14px;">
               <label class="option"><input type="radio" name="partnerInterest" value="Yes" /><span
                   class="option-label">Yes</span></label>
               <label class="option"><input type="radio" name="partnerInterest" value="No" /><span
                   class="option-label">No</span></label>
             </div>
-            <label class="field-label" for="partnerContact">Name / phone number</label>
+            <label class="field-label" for="partnerContact">Who should we contact — Name / phone number</label>
             <input type="text" id="partnerContact" name="partnerContact" />
           </div>
         </div>
@@ -1091,15 +1111,18 @@
           <button type="submit" id="submitBtn">Submit update →</button>
         </div>
 
-        <div class="message success" id="successMsg">
-          ✓ &nbsp;Thank you — your information has been received. We appreciate your continued partnership with Living
-          Well Stores.
-        </div>
         <div class="message error" id="errorMsg">
           Something went wrong. Please try again or contact us directly.
         </div>
 
       </form>
+    </div>
+
+    <!-- Shown after successful submission — replaces the card -->
+    <div id="successMsg" style="display:none; padding:48px 40px; background:#ffffff; border:1px solid #e0e0e0; border-radius:6px; text-align:center; box-shadow:0 2px 8px rgba(15,14,13,0.06);">
+      <p style="font-size:32px; margin-bottom:16px;">✓</p>
+      <p style="font-size:20px; font-weight:600; color:#1a56a0; margin-bottom:12px;">Thank you — your information has been received.</p>
+      <p style="font-size:15px; color:#1a1a1a; line-height:1.7;">We appreciate your continued partnership with Living Well Stores.<br>You may now close this page.</p>
     </div>
 
     <p class="footer" style="margin-top:8px;"><span style="font-weight: bold;">This form was sent from Living Well
@@ -1108,6 +1131,14 @@
 
   <script>
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEZtgF0kOO6bpzYXzs3LxeLEU9_qqUANIY0MxjCeXduqLfhasHMvnM2xOQ4ycPNNzOFA/exec';
+
+    // Mobile scroll hint for matrix tables
+    document.querySelectorAll('.matrix-wrap').forEach(wrap => {
+      wrap.classList.add('scroll-hint');
+      wrap.addEventListener('scroll', () => {
+        if (wrap.scrollLeft > 10) wrap.classList.remove('scroll-hint');
+      }, { passive: true });
+    });
 
     const form = document.getElementById('surveyForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -1123,22 +1154,36 @@
     if (sidField && urlParams.get('sid')) sidField.value = urlParams.get('sid');
 
     // Early exit when respondent selects No
-    let declineSubmitted = false;
     form.querySelectorAll('input[name="continueNetwork"]').forEach(radio => {
       radio.addEventListener('change', () => {
         const declined = radio.value === 'No' && radio.checked;
         surveyBody.style.display = declined ? 'none' : '';
         submitRow.style.display = declined ? 'none' : '';
         goodbyeMsg.style.display = declined ? 'block' : 'none';
-        if (declined && !declineSubmitted) {
-          declineSubmitted = true;
-          fetch(APPS_SCRIPT_URL, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ submittedAt: new Date().toISOString(), servicerID: sidField.value, continueNetwork: 'No' }),
-          }).catch(() => {});
+        if (!declined) {
+          // Reset the decline section if they switch back to Yes
+          document.getElementById('declineReason').value = '';
+          document.getElementById('declineConfirm').style.display = 'none';
+          document.getElementById('declineSubmitBtn').disabled = false;
+          document.getElementById('declineReasonSection').style.display = 'block';
         }
-        if (!declined) declineSubmitted = false;
+      });
+    });
+
+    // Submit the No response (with optional reason) when they click the button
+    document.getElementById('declineSubmitBtn').addEventListener('click', () => {
+      const btn = document.getElementById('declineSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      const reason = (document.getElementById('declineReason').value || '').trim();
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ submittedAt: new Date().toISOString(), servicerID: sidField.value, continueNetwork: 'No', declineReason: reason }),
+      }).catch(() => {}).finally(() => {
+        btn.textContent = 'Submit response';
+        document.getElementById('declineConfirm').style.display = 'inline';
+        document.getElementById('declineReasonSection').querySelector('textarea').disabled = true;
       });
     });
 
@@ -1154,7 +1199,6 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      successMsg.classList.remove('visible');
       errorMsg.classList.remove('visible');
 
       // Reject empty/bot submissions — company name is the minimum required field
@@ -1183,7 +1227,6 @@
         prod_scooter: matrixRow('prod_scooter'), prod_ewheelchair: matrixRow('prod_ewheelchair'),
         prod_liftchair: matrixRow('prod_liftchair'), prod_vehiclelift: matrixRow('prod_vehiclelift'),
         prod_ramp: matrixRow('prod_ramp'), prod_stairlift: matrixRow('prod_stairlift'),
-        prod_rxpower: matrixRow('prod_rxpower'), prod_rxlift: matrixRow('prod_rxlift'),
         prod_aginplace: matrixRow('prod_aginplace'),
         prod_other: val('prod_other_desc') + ' — ' + matrixRow('prod_other'),
         oversized: radio('oversized'),
@@ -1210,8 +1253,8 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-        form.reset();
-        successMsg.classList.add('visible');
+        document.querySelector('.card').style.display = 'none';
+        successMsg.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         errorMsg.classList.add('visible');
