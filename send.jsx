@@ -38,7 +38,7 @@ async function sendOne({ to, name, company }) {
   const { data, error } = await resend.emails.send({
     from:    SENDER,
     to,
-    subject: `An important message from Living Well Stores to ${company}`,
+    subject: `Survey from Living Well Stores coming`,
     html,
   });
 

@@ -22,6 +22,7 @@ import {
   Row,
   Column,
   Heading,
+  Img,
   Text,
   Button,
   Hr,
@@ -45,6 +46,7 @@ export default function FormInviteEmail({
   return (
     <Html lang="en">
       <Head>
+        <style>{`.email-btn { transition: background-color 0.5s ease !important; } .email-btn:hover { background-color: #F58A22 !important; }`}</style>
         <Font
           fontFamily="DM Sans"
           fallbackFontFamily="Helvetica"
@@ -57,11 +59,21 @@ export default function FormInviteEmail({
         />
       </Head>
       <Preview>
-        An important message from Living Well Stores — please complete our servicer survey.
+        An important message from Living Well Stores. Please complete our servicer survey.
       </Preview>
 
       <Body style={styles.body}>
         <Container style={styles.container}>
+
+          {/* Logo */}
+          <Section style={styles.logoSection}>
+            <Img
+              src="https://jag8932.github.io/servicer-survey.github.io/public/Logo_LWS_Tag_600px.png"
+              alt="Living Well Stores"
+              width="100%"
+              style={styles.logo}
+            />
+          </Section>
 
           {/* Top accent bar */}
           <Section style={styles.accentBar} />
@@ -79,31 +91,24 @@ export default function FormInviteEmail({
 
             {/* Body copy */}
             <Text style={styles.body_text}>
-              This email contains a link below to the Living Well Stores servicer survey.
-              We will use this information to help ensure that we can deliver service work
-              orders to you reliably, accurately and in a timely manner.
+              In a few days, we're going to begin distributing our annual servicer survey. Please be on the lookout for the email that will contain a link to the survey. The email will carry the subject, "An important message from Living Well Stores to [your company name]".
             </Text>
 
             <Text style={styles.body_text}>
-              We would be grateful if you'd take ten minutes to complete this survey.
-              If you are concerned with the authenticity of this message or the survey,
-              call us at <strong>800-704-8432 X101</strong>.
+              This will be your opportunity to tell us what services you offer, brands that you service, what your rates are and more. We'll use this information so that we can get work orders into your hands more efficiently and containing more accurate and useful information.
             </Text>
 
-            {/* CTA */}
-            <Section style={styles.cta_section}>
-              <Button href={formUrl} style={styles.button}>
-                Open the survey →
-              </Button>
-            </Section>
+            <Text style={styles.body_text}>
+              We know you're busy so the survey will only take a few minutes to complete. You'll be able to complete it on a PC or smartphone. We would appreciate it if you could give it your attention within a week.
+            </Text>
 
             <Hr style={styles.hr} />
 
             {/* Sign-off */}
             <Text style={styles.signoff}>
-              Thank you for taking the time — it genuinely helps.
+              Thank you for being a Living Well Stores servicer-partner and for offering to help those with illnesses, injuries and disabilities!
             </Text>
-            <Text style={styles.sender}>— {senderName}</Text>
+            <Text style={styles.sender}>{senderName}</Text>
 
           </Section>
 
@@ -136,8 +141,17 @@ const styles = {
     maxWidth: '560px',
     margin: '0 auto',
   },
+  logoSection: {
+    backgroundColor: '#ffffff',
+    padding: '24px 24px 0',
+    borderRadius: '6px 6px 0 0',
+  },
+  logo: {
+    maxWidth: '100%',
+    display: 'block',
+  },
   accentBar: {
-    backgroundColor: '#c8440a',
+    backgroundColor: '#49A049',
     height: '4px',
     borderRadius: '2px 2px 0 0',
   },
@@ -152,7 +166,7 @@ const styles = {
     fontSize: '11px',
     fontWeight: '500',
     letterSpacing: '0.14em',
-    color: '#c8440a',
+    color: '#49A049',
     margin: '0 0 16px 0',
   },
   heading: {
