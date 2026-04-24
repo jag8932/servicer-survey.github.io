@@ -17,9 +17,9 @@ import FormInviteEmail from './FormInviteEmail.jsx';
 // ─── CONFIG ───────────────────────────────────────────────────
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const SENDER   = 'Living Well Stores <servicenetwork@livingwellstores.com>'; // must be a verified Resend domain
+const SENDER   = 'Living Well Stores <servicernetwork@livingwellstores.com>'; // must be a verified Resend domain
 const FORM_URL = 'https://jag8932.github.io/servicer-survey.github.io/';           // your hosted form URL
-const DEADLINE = 'Friday, April 11th';             // set to null to hide
+const DEADLINE =  null;           // set to null to hide
 // ──────────────────────────────────────────────────────────────
 
 // Single send — one recipient

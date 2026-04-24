@@ -591,6 +591,16 @@
           <p style="font-size:15px; color:#1a1a1a; line-height:1.7;">We're sorry to hear you'd like to be removed from our servicer network. We'll update our records accordingly. If you change your mind in the future, please reach out to us at <strong>servicenetwork@livingwellstores.com</strong> or call <strong>800-704-8432</strong>.</p>
 
           <div id="declineReasonSection" style="margin-top:24px; border-top:1px solid #b3d4f5; padding-top:20px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+              <div>
+                <label for="declineName" style="display:block; font-size:14px; font-weight:500; color:#1a1a1a; margin-bottom:6px;">Your name</label>
+                <input type="text" id="declineName" name="declineName" placeholder="Full name" style="width:100%; border:1px solid #b3d4f5; border-radius:4px; padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:14px; color:#1a1a1a; outline:none; background:#fff;" />
+              </div>
+              <div>
+                <label for="declineCompany" style="display:block; font-size:14px; font-weight:500; color:#1a1a1a; margin-bottom:6px;">Company name</label>
+                <input type="text" id="declineCompany" name="declineCompany" placeholder="Company name" style="width:100%; border:1px solid #b3d4f5; border-radius:4px; padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:14px; color:#1a1a1a; outline:none; background:#fff;" />
+              </div>
+            </div>
             <label for="declineReason" style="display:block; font-size:14px; font-weight:500; color:#1a1a1a; margin-bottom:8px;">Would you mind sharing your reasons? <span style="font-weight:300;">(optional)</span></label>
             <textarea id="declineReason" name="declineReason" rows="4" style="width:100%; border:1px solid #b3d4f5; border-radius:4px; padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:14px; color:#1a1a1a; resize:vertical; outline:none; background:#fff;" placeholder="Your feedback helps us improve our servicer program…"></textarea>
             <div style="margin-top:12px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
@@ -973,7 +983,7 @@
 
         <!-- ── SECTION 6: RATES ── -->
         <div class="section-block">
-          <h2 class="section-heading"><span class="num">6</span> Rates</h2>
+          <h2 class="section-heading"><span class="num">6</span> Rates — What Will You Charge Us</h2>
 
           <div class="field-group">
             <label class="field-label">In-shop service rate</label>
@@ -1161,6 +1171,10 @@
         goodbyeMsg.style.display = declined ? 'block' : 'none';
         if (!declined) {
           // Reset the decline section if they switch back to Yes
+          document.getElementById('declineName').value = '';
+          document.getElementById('declineName').disabled = false;
+          document.getElementById('declineCompany').value = '';
+          document.getElementById('declineCompany').disabled = false;
           document.getElementById('declineReason').value = '';
           document.getElementById('declineConfirm').style.display = 'none';
           document.getElementById('declineSubmitBtn').disabled = false;
@@ -1175,14 +1189,18 @@
       btn.disabled = true;
       btn.textContent = 'Submitting…';
       const reason = (document.getElementById('declineReason').value || '').trim();
+      const declineName = (document.getElementById('declineName').value || '').trim();
+      const declineCompany = (document.getElementById('declineCompany').value || '').trim();
       fetch(APPS_SCRIPT_URL, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ submittedAt: new Date().toISOString(), servicerID: sidField.value, continueNetwork: 'No', declineReason: reason }),
+        body: JSON.stringify({ submittedAt: new Date().toISOString(), servicerID: sidField.value, continueNetwork: 'No', declineName: declineName, declineCompany: declineCompany, declineReason: reason }),
       }).catch(() => {}).finally(() => {
         btn.textContent = 'Submit response';
         document.getElementById('declineConfirm').style.display = 'inline';
         document.getElementById('declineReasonSection').querySelector('textarea').disabled = true;
+        document.getElementById('declineName').disabled = true;
+        document.getElementById('declineCompany').disabled = true;
       });
     });
 
